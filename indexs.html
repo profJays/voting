@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Working</title>
+        <link rel="stylesheet" href="style.css">
+        <script>
+            function redirectAfterSubmit(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Capture form data and submit it to Google Forms
+                const form = event.target;
+                const formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // Bypass CORS restrictions with no-cors mode
+                }).then(() => {
+                    // Redirect after a short delay to ensure the form is submitted
+                    setTimeout(() => {
+                        window.location.href = "about.html"; // Replace with your redirect page
+                    }, 200); // 1 second delay
+                }).catch(error => {
+                    console.error("Form submission error:", error);
+                    alert("There was an issue with the form submission.");
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <form 
+            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSflWjP9VwCcCf953_e2XKYg729-jBHUt41_a1eN3GyhGR96-g/formResponse" 
+            method="post" 
+            onsubmit="redirectAfterSubmit(event)"
+        >
+            <div class="form-element">
+                <span>Name</span>
+                <input type="text" name="entry.358508899" placeholder="Name" required>
+            </div>
+            <div class="form-radio">
+                <input type="radio" id="Temi" name="entry.126804501" value="Temi">
+                <label for="Temi"> Temi </label><br/>
+                <input type="radio" id="Dami" name="entry.126804501" value="Dami">
+                <label for="Dami"> Dami </label><br/>
+            </div>
+            <div class="form-element-submit">
+                <button type="submit">Vote</button>
+            </div>
+        </form>
+    </body>
+</html>
