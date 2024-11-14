@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>About | eVoting</title>
+    <title>Live Result | eVoting</title>
     <meta name="robots" content="noindex, follow">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,6 +18,76 @@
     <link rel="stylesheet" href="css/feature.css">
     <!-- Style css -->
     <link rel="stylesheet" href="css/style.css">
+
+
+        <!-- Load Google Charts library -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <script type="text/javascript">
+            // Load the Visualization API and corechart package
+            google.charts.load('current', { packages: ['corechart', 'table'] });
+    
+            // Set a callback function to run when the API is loaded
+            google.charts.setOnLoadCallback(drawChart);
+    
+            // Function to fetch data from Google Sheets using the API
+            function drawChart() {
+                const spreadsheetId = '1zeJbYBQJdtRglFJzr1EXUVCM9DPOoEAomzg5rO0ikvI';  // Your Spreadsheet ID
+                const range = 'Sheet1!C:C'; // Column C contains the vote ("Temi" or "Dami")
+    
+                // Construct the Google Sheets API URL
+                const queryUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=AIzaSyCKUy5vuKWbo4CqTUqjohHNzrtwTiBjNnM`;
+    
+                // Fetch data from the Google Sheets API
+                fetch(queryUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process data to count votes for "Temi" and "Dami"
+                        const votes = { Temi: 0, Dami: 0 };
+    
+                        // Loop through the data (skip the header)
+                        data.values.forEach(row => {
+                            if (row[0] === 'Temi') {
+                                votes.Temi++;
+                            } else if (row[0] === 'Dami') {
+                                votes.Dami++;
+                            }
+                        });
+    
+                        // Prepare the data for the chart
+                        const chartData = new google.visualization.DataTable();
+                        chartData.addColumn('string', 'Name');
+                        chartData.addColumn('number', 'Votes');
+    
+                        // Add aggregated vote counts to the chart data
+                        chartData.addRow(['Temi', votes.Temi]);
+                        chartData.addRow(['Dami', votes.Dami]);
+    
+                        // Set chart options
+                        const options = {
+                        title: 'Live Voting Results',
+                        pieHole: 0.4,
+                        width: 600,
+                        height: 400,
+                        backgroundColor: 'transparent',  // Transparent background
+                        titleTextStyle: {
+                            color: '#333',
+                            fontSize: 18,
+                            bold: true,
+                            alignment: 'center'  // Center-align the title
+                        },
+                    };
+    
+                        // Create and draw the chart
+                        const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                        chart.draw(chartData, options);
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+    
+            // Optional: Set interval to refresh the chart every 10 seconds (or adjust as needed)
+            setInterval(drawChart, 10000);  // Update every 10 seconds
+        </script>
 </head>
 
 <body class="template-color-1 spybody white-version" data-spy="scroll" data-target=".navbar-example2" data-offset="150">
@@ -205,96 +275,46 @@
     </div>
     <!-- End Popup Mobile Menu  -->
 
-
-
-
     <main class="main-page-wrapper">
-
-        <!-- Start Slider Area -->
-        <div id="home" class="rn-slider-area">
-            <div class="slide slider-style-1">
-                <div class="container">
-                    <div class="row row--30 align-items-center">
-                        <div class="col-lg-6 mt_md--50 mt_sm--50 mt_lg--30">
-                            <div class="content">
+        <!-- Start Testimonia Area  -->
+        <div class="rn-testimonial-area rn-section-gap  mt--50"  id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true" class="section-title text-center">
+                            <span class="subtitle">Stay on this page</span>
+                            <h2 class="title">LIVE RESULT</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" data-aos-once="true">
+                    <div class="col-lg-12">
+                        <div class="testimonial-activation testimonial-pb">
+                            <!-- Start Single testiminail -->
+                            <div class="testimonial mt--50 mt_md--40 mt_sm--40">
                                 <div class="inner">
-                                    <span class="subtitle">About Pacesetter eVoting Platform</span>
-                                    <h1 class="title">We have a <span>dream</span><br>
-                                        <span class="header-caption" id="page-top">
-                                            <!-- type headline start-->
-                                           
-                                        <!-- type headline end -->
-                                        </span>
-                                    </h1>
-
-                                    <div>
-                                        <p style="font-size: large;" class="description">Imagine a Nigeria where elections are fair, fast, and transparent. We do! At Pacesetters College, we're on a mission to harness the power of technology to revolutionize the electoral process. Our e-voting project is more than just a dream - it's a movement. We're determined to provide a solution to the election problems that have plagued our nation for far too long. With innovation, creativity, and a passion for change, we're confident that our project will set the pace for a better Nigeria. Join us on this exciting journey and together, let's make history! Let's create a future where every vote counts, and every voice is heard. A future where technology and democracy intersect to build a brighter tomorrow for all Nigerians. The future is now, and it's in our hands!</p>
+                                    <div class="card-description">
+                                        <!-- The chart will be rendered here -->
+                                        <div id="chart_div"></div>
+                                    </div>
+                                    <div class="card-info">
+                                        <div class="card-thumbnail">
+                                            <img src="images/final-home--1st.png" alt="Testimonial-image">
+                                        </div>
+                                        <div class="card-content">
+                                            <span class="subtitle mt--10">Winner</span>
+                                            <h3 class="title">Team Temi</h3>
+                                            <span class="designation">What ever the argument is</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-6">
-                            <div class="">
-                                <img src="images/students.jpg" alt="Images">
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Slider Area -->
-
-        <!-- Start Contact section -->
-        <div class="rn-contact-area rn-section-gap" id="contacts">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title text-center">
-                            <span class="subtitle">Join the Movement</span>
-                            <h2 class="title">Become a Pacesetter</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt--50 mt_md--40 mt_sm--40 mt-contact-sm">
-                    <div class="col-lg-5">
-                        <div class="contact-about-area">
-                            <!-- <div class="thumbnail">
-                                <img src="images/contact1.png" alt="contact-img">
-                            </div> -->
-                            <div class="title-area">
-                                <h4 class="title">Pacesetter Schools</h4>
-                                <span>Chief Operating Officer</span>
-                            </div>
-                            <div class="description">
-                                <p>I am available for freelance work. Connect with me via and call in to my account.
-                                </p>
-                                <span class="phone">Phone: <a href="tel:01941043264">+01234567890</a></span>
-                                <span class="mail">Email: <a href="mailto:admin@example.com">admin@example.com</a></span>
-                            </div>
-                            <div class="social-area">
-                                <div class="name">FIND WITH ME</div>
-                                <div class="social-icone">
-                                    <a href="#"><i data-feather="facebook"></i></a>
-                                    <a href="#"><i data-feather="linkedin"></i></a>
-                                    <a href="#"><i data-feather="instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos-delay="600" class="col-lg-7 contact-input">
-                        <div class="bg-dark">
-                            <iframe
-                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Wuye%20abuja&zoom=10&maptype=roadmap"
-                            frameborder="0" style="width: 100%; height: 450px; border:0;" allowfullscreen="" aria-hidden="false"
-                            tabindex="0"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Contuct section -->
+        <!-- End Testimonia Area  -->
         <!-- Back to  top Start -->
         <div class="backto-top">
             <div>
@@ -306,7 +326,7 @@
     </main>
 
     <!-- Start Footer Area -->
-    <div class="rn-footer-area rn-section-gap section-separator">
+    <div class="rn-footer-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

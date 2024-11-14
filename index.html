@@ -18,6 +18,29 @@
     <link rel="stylesheet" href="css/feature.css">
     <!-- Style css -->
     <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        function redirectAfterSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Capture form data and submit it to Google Forms
+            const form = event.target;
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' // Bypass CORS restrictions with no-cors mode
+            }).then(() => {
+                // Redirect after a short delay to ensure the form is submitted
+                setTimeout(() => {
+                    window.location.href = "result.html"; // Replace with your redirect page
+                }, 200); // 1 second delay
+            }).catch(error => {
+                console.error("Form submission error:", error);
+                alert("There was an issue with the form submission.");
+            });
+        }
+    </script>
 </head>
 
 <body class="template-color-1 spybody white-version" data-spy="scroll" data-target=".navbar-example2" data-offset="150">
@@ -49,7 +72,7 @@
                     </nav>
                     <!-- Start Header Right  -->
                     <div class="header-right">
-                        <a class="rn-btn" target="_blank" href="result.html"><span>LIVE RESULT</span></a>
+                        <a class="rn-btn" href="result.html"><span>LIVE RESULT</span></a>
                         <div class="hamberger-menu d-block d-xl-none">
                             <i id="menuBtn" class="feather-menu humberger-menu"></i>
                         </div>
@@ -79,42 +102,14 @@
                         <button class="close-menu-activation close"><i data-feather="x"></i></button>
                     </div>
                 </div>
-                <p class="discription">Inbio is a personal portfolio template. You can customize all.</p>
+                <p class="discription">We Set the Pace.</p>
             </div>
             <div class="content">
                 <ul class="primary-menu nav nav-pills onepagenav">
-                    <li class="nav-item current"><a class="nav-link smoth-animation active" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="#portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="#resume">Resume</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="#clients">Clients</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="#pricing">Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="#blog">blog</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="#contacts">Contact</a></li>
+                    <li class="nav-item current"><a class="nav-link smoth-animation active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link smoth-animation" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link smoth-animation" href="result.html">Live Result</a></li>
                 </ul>
-                <!-- social sharea area -->
-                <div class="social-share-style-1 mt--40">
-                    <span class="title">find with me</span>
-                    <ul class="social-share d-flex liststyle">
-                        <li class="facebook"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook">
-                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                </svg></a>
-                        </li>
-                        <li class="instagram"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                </svg></a>
-                        </li>
-                        <li class="linkedin"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin">
-                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                    <rect x="2" y="9" width="4" height="12"></rect>
-                                    <circle cx="4" cy="4" r="2"></circle>
-                                </svg></a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end -->
             </div>
         </div>
     </div>
@@ -147,6 +142,7 @@
                                                     <b class="is-hidden">Growth.</b>
                                                     <b class="is-hidden">Team Work.</b>
                                                     <b class="is-hidden">Excellence.</b>
+                                                    <b class="is-hidden">Hard Work.</b>
                                                 </span>
                                         </span>
                                         <!-- type headline end -->
@@ -211,7 +207,11 @@
                         </div>
                     </div>
                 </div>
-                <form action="">
+                <form 
+                    action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSflWjP9VwCcCf953_e2XKYg729-jBHUt41_a1eN3GyhGR96-g/formResponse" 
+                    method="post" 
+                    onsubmit="redirectAfterSubmit(event)"
+                >
                     <div class="row row--25 mt--10 mt_md--10 mt_sm--10">
                         <!-- Start Single Portfolio -->
                         <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-6 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
@@ -222,12 +222,10 @@
                                             <img src="images/portfolio-01.jpg" alt="Personal Portfolio Images">
                                         </a>
                                     </div>
-                                    <div class="content">
-                                        <h4 class="title text-center"><a>Team Wuye</a> </h4>
-                                        <input type="radio" style="background-color: blue;" id="Temi" name="entry.126804501" value="Temi">
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="Temi" name="entry.126804501" value="Temi">
+                                    <div class="content text-center">
+                                        <h4 class="title text-center"><a>Team Temi</a> </h4>
+                                        <input type="radio" id="Temi" name="entry.126804501" value="Temi" required>
+                            <label for="Temi">&nbsp;</label><br/>
                                     </div>
                                 </div>
                             </div>
@@ -243,113 +241,28 @@
                                             <img src="images/portfolio-03.jpg" alt="Personal Portfolio Images">
                                         </a>
                                     </div>
-                                    <div class="content">
-                                        <h4 class="title text-center"><a>Team Guzape</a></h4>
+                                    <div class="content text-center">
+                                        <h4 class="title text-center"><a>Team Dami</a></h4>
+                                        <input type="radio" id="Dami" name="entry.126804501" value="Dami" required>
+                            <label for="Dami">&nbsp;</label><br/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- End Single Portfolio -->
 
-                    </div>             
+                    </div>   
+                    <div class="col-lg-12">
+                        <br><br>
+                        <button name="submit" type="submit" id="submit" class="rn-btns">
+                            <span>VOTE NOW</span>
+                            <i data-feather="arrow-right"></i>
+                        </button>
+                    </div>      
                 </form>
             </div>
         </div>
         <!-- End portfolio Area -->
-
-        <!-- Start Contact section -->
-        <!-- <div class="rn-contact-area rn-section-gap section-separator" id="contacts">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title text-center">
-                            <span class="subtitle">Join the movement</span>
-                            <h2 class="title">Become a Pacesetter today</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt--50 mt_md--40 mt_sm--40 mt-contact-sm">
-                    <div class="col-lg-5">
-                        <div class="contact-about-area">
-                            <div class="thumbnail">
-                                <img src="images/contact1.png" alt="contact-img">
-                            </div>
-                            <div class="title-area">
-                                <h4 class="title">Nevine Acotanza</h4>
-                                <span>Chief Operating Officer</span>
-                            </div>
-                            <div class="description">
-                                <p>I am available for freelance work. Connect with me via and call in to my account.
-                                </p>
-                                <span class="phone">Phone: <a href="tel:01941043264">+01234567890</a></span>
-                                <span class="mail">Email: <a href="mailto:admin@example.com">admin@example.com</a></span>
-                            </div>
-                            <div class="social-area">
-                                <div class="name">FIND WITH ME</div>
-                                <div class="social-icone">
-                                    <a href="#"><i data-feather="facebook"></i></a>
-                                    <a href="#"><i data-feather="linkedin"></i></a>
-                                    <a href="#"><i data-feather="instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos-delay="600" class="col-lg-7 contact-input">
-                        <div class="contact-form-wrapper">
-                            <div class="introduce">
-
-                                <form class="rnt-contact-form rwt-dynamic-form row" id="contact-form" method="POST" action="mail.php">
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="contact-name">Your Name</label>
-                                            <input class="form-control form-control-lg" name="contact-name" id="contact-name" type="text">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="contact-phone">Phone Number</label>
-                                            <input class="form-control" name="contact-phone" id="contact-phone" type="text">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="contact-email">Email</label>
-                                            <input class="form-control form-control-sm" id="contact-email" name="contact-email" type="email">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="subject">subject</label>
-                                            <input class="form-control form-control-sm" id="subject" name="subject" type="text">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="contact-message">Your Message</label>
-                                            <textarea name="contact-message" id="contact-message" cols="30" rows="10"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <button name="submit" type="submit" id="submit" class="rn-btn">
-                                            <span>SEND MESSAGE</span>
-                                            <i data-feather="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- End Contuct section -->
 
         <!-- Modal Portfolio Body area Start -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
