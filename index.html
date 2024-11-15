@@ -34,7 +34,7 @@
                 // Redirect after a short delay to ensure the form is submitted
                 setTimeout(() => {
                     window.location.href = "result.html"; // Replace with your redirect page
-                }, 200); // 1 second delay
+                }, 100); // 1 second delay
             }).catch(error => {
                 console.error("Form submission error:", error);
                 alert("There was an issue with the form submission.");
@@ -106,9 +106,9 @@
             </div>
             <div class="content">
                 <ul class="primary-menu nav nav-pills onepagenav">
-                    <li class="nav-item current"><a class="nav-link smoth-animation active" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="result.html">Live Result</a></li>
+                    <li class="nav-item current"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="result.html">Live Result</a></li>
                 </ul>
             </div>
         </div>
@@ -150,13 +150,7 @@
                                     </h1>
 
                                     <div>
-                                        <p class="description">I use animation as a third dimension by which to simplify
-                                            experiences and kuiding thro each and every interaction. I’m not adding
-                                            motion
-                                            just to spruce things up, but doing it in ways that.I use animation as a third dimension by which to simplify
-                                            experiences and kuiding thro each and every interaction. I’m not adding
-                                            motion
-                                            just to spruce things up, but doing it in ways that.</p>
+                                        <p class="description"><b>Today's Challenge:</b> Let's face it, Nigeria's elections haven't always been the most efficient or transparent. Delays, inefficiencies, and a general lack of transparency have led to disputes and undermined the democratic process. <br> It's time to shake things up! We believe every vote matters and every voice should be heard. With technology on our side, we can make this a reality. Join us on our mission to revolutionize the electoral process and create a brighter future for all Nigerians. Let's do this!</p>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +181,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title text-center" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true">
-                            <h2 class="title">Your opinion matters | Your voice should be heard | Your vote would count!</h2>
+                            <h2 class="title">Your opinion matters <span style="color: #ff014f;">|</span> Your voice should be heard <span style="color: #ff014f;">|</span> Your vote would count!</h2>
                         </div>
                         <div id="voting-section"><br><br></div>
                     </div>
@@ -212,7 +206,8 @@
                     method="post" 
                     onsubmit="redirectAfterSubmit(event)"
                 >
-                    <div class="row row--25 mt--10 mt_md--10 mt_sm--10">
+                <div class="custom-radio-group">
+                    <div class="row row--25 mt--10 mt_md--10 mt_sm--10 radio-group">
                         <!-- Start Single Portfolio -->
                         <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-6 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
                             <div class="rn-portfolio" data-bs-toggle="modal">
@@ -223,9 +218,9 @@
                                         </a>
                                     </div>
                                     <div class="content text-center">
-                                        <h4 class="title text-center"><a>Team Temi</a> </h4>
-                                        <input type="radio" id="Temi" name="entry.126804501" value="Temi" required>
-                            <label for="Temi">&nbsp;</label><br/>
+                                        <h4 class="title text-center"><a>Team Nurse</a> </h4>
+                                        <input type="radio" id="Nurse" name="entry.126804501" value="Nurse" required>
+                            <label class="radio-label" for="Nurse">&nbsp;</label><br/>
                                     </div>
                                 </div>
                             </div>
@@ -242,9 +237,9 @@
                                         </a>
                                     </div>
                                     <div class="content text-center">
-                                        <h4 class="title text-center"><a>Team Dami</a></h4>
-                                        <input type="radio" id="Dami" name="entry.126804501" value="Dami" required>
-                            <label for="Dami">&nbsp;</label><br/>
+                                        <h4 class="title text-center"><a>Team Doctor</a></h4>
+                                        <input type="radio" id="Doctor" name="entry.126804501" value="Doctor" required>
+                            <label class="radio-label" for="Doctor">&nbsp;</label><br/>
                                     </div>
                                 </div>
                             </div>
@@ -258,164 +253,12 @@
                             <span>VOTE NOW</span>
                             <i data-feather="arrow-right"></i>
                         </button>
-                    </div>      
+                    </div>  
+                </div>    
                 </form>
             </div>
         </div>
         <!-- End portfolio Area -->
-
-        <!-- Modal Portfolio Body area Start -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i data-feather="x"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row align-items-center">
-
-                            <div class="col-lg-6">
-                                <div class="portfolio-popup-thumbnail">
-                                    <div class="image">
-                                        <img class="w-100" src="images/portfolio-04.jpg" alt="slide">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="text-content">
-                                    <h3>
-                                        <span>Featured - Design</span> App Design Development.
-                                    </h3>
-                                    <p class="mb--30">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.</p>
-                                    <p>Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!</p>
-                                    <div class="button-group mt--20">
-                                        <a href="#" class="rn-btn thumbs-icon">
-                                            <span>LIKE THIS</span>
-                                            <i data-feather="thumbs-up"></i>
-                                        </a>
-                                        <a href="#" class="rn-btn">
-                                            <span>VIEW PROJECT</span>
-                                            <i data-feather="chevron-right"></i>
-                                        </a>
-                                    </div>
-
-                                </div>
-                                <!-- End of .text-content -->
-                            </div>
-                        </div>
-                        <!-- End of .row Body-->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Portfolio area -->
-        <!-- Modal Blog Body area Start -->
-        <div class="modal fade" id="exampleModalCenters" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-news" role="document">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i data-feather="x"></i></span>
-                        </button>
-                    </div>
-
-                    <!-- End of .modal-header -->
-
-                    <div class="modal-body">
-                        <img src="images/blog-big-01.jpg" alt="news modal" class="img-fluid modal-feat-img">
-                        <div class="news-details">
-                            <span class="date">2 May, 2021</span>
-                            <h2 class="title">Digital Marketo to Their New Office.</h2>
-                            <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
-                                facer
-                                possim assum.
-                                Typi non
-                                habent claritatem insitam; est usus legentis in iis qui facit eorum
-                                claritatem.
-                                Investigationes
-                                demonstraverunt
-                                lectores legere me lius quod ii legunt saepius. Claritas est etiam processus
-                                dynamicus, qui
-                                sequitur
-                                mutationem consuetudium lectorum.</p>
-                            <h4>Nobis eleifend option conguenes.</h4>
-                            <p>Mauris tempor, orci id pellentesque convallis, massa mi congue eros, sed
-                                posuere
-                                massa nunc quis
-                                dui.
-                                Integer ornare varius mi, in vehicula orci scelerisque sed. Fusce a massa
-                                nisi.
-                                Curabitur sit
-                                amet
-                                suscipit nisl. Sed eget nisl laoreet, suscipit enim nec, viverra eros. Nunc
-                                imperdiet risus
-                                leo,
-                                in rutrum erat dignissim id.</p>
-                            <p>Ut rhoncus vestibulum facilisis. Duis et lorem vitae ligula cursus venenatis.
-                                Class aptent
-                                taciti sociosqu
-                                ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc vitae
-                                nisi
-                                tortor. Morbi
-                                leo
-                                nulla, posuere vel lectus a, egestas posuere lacus. Fusce eleifend hendrerit
-                                bibendum. Morbi
-                                nec
-                                efficitur ex.</p>
-                            <h4>Mauris tempor, orci id pellentesque.</h4>
-                            <p>Nulla non ligula vel nisi blandit egestas vel eget leo. Praesent fringilla
-                                dapibus dignissim.
-                                Pellentesque
-                                quis quam enim. Vestibulum ultrices, leo id suscipit efficitur, odio lorem
-                                rhoncus dolor, a
-                                facilisis
-                                neque mi ut ex. Quisque tempor urna a nisi pretium, a pretium massa
-                                tristique.
-                                Nullam in
-                                aliquam
-                                diam. Maecenas at nibh gravida, ornare eros non, commodo ligula. Sed
-                                efficitur
-                                sollicitudin
-                                auctor.
-                                Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
-                                et.</p>
-                        </div>
-
-                        <!-- Comment Section Area Start -->
-                        <div class="comment-inner">
-                            <h3 class="title mb--40 mt--50">Leave a Reply</h3>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="rnform-group"><input type="text" placeholder="Name">
-                                        </div>
-                                        <div class="rnform-group"><input type="email" placeholder="Email">
-                                        </div>
-                                        <div class="rnform-group"><input type="text" placeholder="Website">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="rnform-group">
-                                            <textarea placeholder="Comment"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <a class="rn-btn" href="#"><span>SUBMIT NOW</span></a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Comment Section End -->
-                    </div>
-                    <!-- End of .modal-body -->
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Blog area -->
         <!-- Back to  top Start -->
         <div class="backto-top">
             <div>

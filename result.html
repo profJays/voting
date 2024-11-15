@@ -43,14 +43,14 @@
                     .then(response => response.json())
                     .then(data => {
                         // Process data to count votes for "Temi" and "Dami"
-                        const votes = { Temi: 0, Dami: 0 };
+                        const votes = { Nurse: 0, Doctor: 0 };
     
                         // Loop through the data (skip the header)
                         data.values.forEach(row => {
-                            if (row[0] === 'Temi') {
-                                votes.Temi++;
-                            } else if (row[0] === 'Dami') {
-                                votes.Dami++;
+                            if (row[0] === 'Nurse') {
+                                votes.Nurse++;
+                            } else if (row[0] === 'Doctor') {
+                                votes.Doctor++;
                             }
                         });
     
@@ -60,14 +60,14 @@
                         chartData.addColumn('number', 'Votes');
     
                         // Add aggregated vote counts to the chart data
-                        chartData.addRow(['Temi', votes.Temi]);
-                        chartData.addRow(['Dami', votes.Dami]);
+                        chartData.addRow(['Nurse', votes.Nurse]);
+                        chartData.addRow(['Doctor', votes.Doctor]);
     
                         // Set chart options
                         const options = {
                         title: 'Live Voting Results',
                         pieHole: 0.4,
-                        width: 600,
+                        width: 450,
                         height: 400,
                         backgroundColor: 'transparent',  // Transparent background
                         titleTextStyle: {
@@ -303,8 +303,8 @@
                                         </div>
                                         <div class="card-content">
                                             <span class="subtitle mt--10">Winner</span>
-                                            <h3 class="title">Team Temi</h3>
-                                            <span class="designation">What ever the argument is</span>
+                                            <h3 class="title">Team ???</h3>
+                                            <span class="designation">Congratulations on your well deserved victory</span>
                                         </div>
                                     </div>
                                 </div>

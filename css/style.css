@@ -19738,14 +19738,14 @@ button.rn-btns {
   padding: 15px 35px;
   list-style: none;
   text-decoration: none;
-  color: var(--color-primary);
+  color: #ffffff
 }
 
 a.rn-btns,
 button.rn-btns {
   border-radius: 6px;
-  background: linear-gradient(145deg, #ffffff, #ffffff);
-  box-shadow: var(--shadow-1);
+  background: linear-gradient(145deg, #ff014f, #ff014f);
+  /* box-shadow: var(--shadow-1); */
   transition: var(--transition);
   position: relative;
   z-index: 2;
@@ -19763,7 +19763,7 @@ button.rn-btns::before {
   border-radius: 6px;
   top: 0;
   left: 0;
-  background: linear-gradient(to right bottom, #ffffff, #ffffff);
+  background: linear-gradient(to right bottom, #fff, #ff014f);
   opacity: 0;
   z-index: -1;
 }
@@ -19782,7 +19782,7 @@ button.rn-btns.no-shadow {
 a.rn-btns.btn-theme,
 button.rn-btns.btn-theme {
   background: var(--color-primary) !important;
-  color: var(--color-white) !important;
+  color: #ffffff !important;
 }
 a.rn-btns.btn-theme::before,
 button.rn-btns.btn-theme::before {
@@ -19792,11 +19792,64 @@ a.rn-btns.btn-transparent,
 button.rn-btns.btn-transparent {
   background: transparent;
 }
-a.rn-btns.btn-transparent::before,
+/* a.rn-btns.btn-transparent::before,
 button.rn-btns.btn-transparent::before {
   display: none;
-}
+} */
 a.rn-btns.thumbs-icon svg,
 button.rn-btns.thumbs-icon svg {
   margin-top: -7px;
 }
+
+    /* Specific wrapper to apply styles */
+    .custom-radio-group .radio-group {
+      display: flex;
+      /* gap: 1.5rem; */
+  }
+
+  /* Hide the original radio button */
+  .custom-radio-group .radio-group input[type="radio"] {
+      display: none !important; /* Add !important to ensure it hides */
+  }
+
+  /* Custom label style */
+  .custom-radio-group .radio-label {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      padding-left: 35px;
+      font-size: 1rem;
+      color: #343a40;
+  }
+
+  /* Larger Circle style */
+  .custom-radio-group .radio-label::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #ff014f;
+      background-color: #fff;
+      /* transition: background-color 0.3s, border-color 0.3s; */
+  }
+
+  /* Inner dot when selected */
+  .custom-radio-group .radio-group input[type="radio"]:checked + .radio-label::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ff014f;
+      /* transition: background-color 0.3s; */
+  }
+
+  /* Hover effect */
+  .custom-radio-group .radio-label:hover::before {
+      border-color: #ff014f;
+  }

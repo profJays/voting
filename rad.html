@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Google Sheets Chart</title>
+
+    <!-- Load Google Charts library -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+        // Load the Visualization API and corechart package
+        google.charts.load('current', { packages: ['corechart', 'table'] });
+
+        // Set a callback function to run when the API is loaded
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Function to fetch data from Google Sheets using the API
+        function drawChart() {
+            const spreadsheetId = '1zeJbYBQJdtRglFJzr1EXUVCM9DPOoEAomzg5rO0ikvI';  // Your Spreadsheet ID
+            const range = 'Sheet1!C:C'; // Column C contains the vote ("Temi" or "Dami")
+
+            // Construct the Google Sheets API URL
+            const queryUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=AIzaSyCKUy5vuKWbo4CqTUqjohHNzrtwTiBjNnM`;
+
+            // Fetch data from the Google Sheets API
+            fetch(queryUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Process data to count votes for "Temi" and "Dami"
+                    const votes = { Temi: 0, Dami: 0 };
+
+                    // Loop through the data (skip the header)
+                    data.values.forEach(row => {
+                        if (row[0] === 'Temi') {
+                            votes.Temi++;
+                        } else if (row[0] === 'Dami') {
+                            votes.Dami++;
+                        }
+                    });
+
+                    // Prepare the data for the chart
+                    const chartData = new google.visualization.DataTable();
+                    chartData.addColumn('string', 'Name');
+                    chartData.addColumn('number', 'Votes');
+
+                    // Add aggregated vote counts to the chart data
+                    chartData.addRow(['Temi', votes.Temi]);
+                    chartData.addRow(['Dami', votes.Dami]);
+
+                    // Set chart options
+                    const options = {
+                        title: 'Live Voting Results',
+                        pieHole: 0.4,
+                        width: 600,
+                        height: 400,
+                        backgroundColor: 'transparent',  // Transparent background
+                        titleTextStyle: {
+                            color: '#333',
+                            fontSize: 18,
+                            bold: true,
+                            alignment: 'center'  // Center-align the title
+                        },
+                    };
+
+                    // Create and draw the chart
+                    const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                    chart.draw(chartData, options);
+
+                    // Update the labels with vote counts
+                    document.getElementById('temi_votes').innerText = `Temi: ${votes.Temi}`;
+                    document.getElementById('dami_votes').innerText = `Dami: ${votes.Dami}`;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Optional: Set interval to refresh the chart every 10 seconds (or adjust as needed)
+        setInterval(drawChart, 10000);  // Update every 10 seconds
+    </script>
+
+    <style>
+        /* Center the content */
+        body, html {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Center-align the title */
+        h1 {
+            text-align: center;
+        }
+
+        /* Style the container for centralized alignment */
+        .container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Chart area styles */
+        #chart_div {
+            background-color: transparent;
+        }
+
+        /* Styling for vote count labels under the chart */
+        .vote-labels {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Live Voting Results</h1>
+        <div id="chart_div"></div>
+        <div class="vote-labels">
+            <span id="temi_votes">Temi: 0</span>
+            <span id="dami_votes">Dami: 0</span>
+        </div>
+    </div>
+</body>
+</html>
