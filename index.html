@@ -43,28 +43,37 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessage.style.display = 'block';
         } else {
             // Hide the error message
-            errorMessage.style.display = 'none';
+            // errorMessage.style.display = 'none';
 
             // Show success message
-            alert('Thank you for voting! Your opinion is valid! Click OK to see results...');
+            // alert('Thank you for voting! Your opinion is valid! Click OK to see results...');
 
             // Submit form data to Google Forms
             const formData = new FormData(voteForm);
             fetch(voteForm.action, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors',
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors',
+        })
+            .then(() => {
+                // Show the custom alert box
+                document.getElementById('customAlert').style.display = 'flex';
+
+                // Redirect after a delay
+                setTimeout(() => {
+                    window.location.href = 'result.html';
+                }, 3000); // 3-second delay
             })
-                .then(() => {
-                    // Delay before redirecting to allow the message to be seen
-                    setTimeout(() => {
-                        window.location.href = 'result.html';
-                    }, 100); // 1.5-second delay
-                })
-                .catch((error) => {
-                    console.error('Form submission error:', error);
-                    alert('There was an issue with the form submission.');
-                });
+            .catch((error) => {
+                console.error('Form submission error:', error);
+                alert('There was an issue with the form submission.');
+            });
+
+        // Function to hide the alert box manually (optional)
+        function hideAlert() {
+            document.getElementById('customAlert').style.display = 'none';
+            window.location.href = 'result.html'; // Redirect manually
+        }
         }
     });
 });
@@ -289,8 +298,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             <i data-feather="arrow-right"></i>
                         </button>
                         <br>
-                        <div class="success-message text-center" id="successMessage" style="display: none; color: green; font-weight: bold;">
-                            Thank you for voting! Redirecting to results page...
+                        <div id="customAlert" class="custom-alert" style="display: none;">
+                            <div class="custom-alert-content">
+                                <p>Thank you! Your vote has been submitted successfully.</p>
+                                <button onclick="hideAlert()">OK</button>
+                            </div>
                         </div>
                         
                     </div>  
