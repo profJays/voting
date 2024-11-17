@@ -19853,3 +19853,35 @@ button.rn-btns.thumbs-icon svg {
   .custom-radio-group .radio-label:hover::before {
       border-color: #ff014f;
   }
+
+  /* Ensure hidden but clickable */
+.custom-radio-group .radio-group input[type="radio"] {
+  position: absolute; /* Move off-screen */
+  opacity: 0; /* Make it invisible */
+  pointer-events: none; /* Prevent direct interaction */
+}
+
+/* Custom label style remains interactive */
+.custom-radio-group .radio-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  padding-left: 35px;
+  font-size: 1rem;
+  color: #343a40;
+}
+
+/* Custom styles for checked state remain unchanged */
+.custom-radio-group .radio-group input[type="radio"]:checked + .radio-label::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff014f;
+}
+
+  /* Error Message */

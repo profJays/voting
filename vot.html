@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Form with Validation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <h1>Vote for Your Favorite</h1>
+    <form id="voteForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSflWjP9VwCcCf953_e2XKYg729-jBHUt41_a1eN3GyhGR96-g/formResponse" method="POST">
+        <div class="form-radio">
+            <input type="radio" id="Temi" name="entry.126804501" value="Temi">
+            <label for="Temi">Temi</label><br/>
+
+            <input type="radio" id="Dami" name="entry.126804501" value="Dami">
+            <label for="Dami">Dami</label><br/>
+        </div>
+        <div class="form-element-submit">
+            <button type="submit">Vote</button>
+        </div>
+        <div class="error-message" id="errorMessage">
+            Please select an option before submitting.
+        </div>
+    </form>
+
+    <script>
+        // Get the form and error message elements
+        const voteForm = document.getElementById('voteForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Add an event listener to the form submission
+        voteForm.addEventListener('submit', function(event) {
+            // Check if any radio button is selected
+            const selectedOption = document.querySelector('input[name="entry.126804501"]:checked');
+
+            if (!selectedOption) {
+                // Prevent form submission
+                event.preventDefault();
+
+                // Show the error message
+                errorMessage.style.display = 'block';
+            } else {
+                // Hide the error message if validation passes
+                errorMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

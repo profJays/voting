@@ -18,29 +18,59 @@
     <link rel="stylesheet" href="css/feature.css">
     <!-- Style css -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .error-message {
+            display: none; /* Ensure it's hidden initially */
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const voteForm = document.getElementById('voteForm');
+    const errorMessage = document.getElementById('errorMessage');
 
-    <script>
-        function redirectAfterSubmit(event) {
-            event.preventDefault(); // Prevent the default form submission
+    voteForm.addEventListener('submit', function (event) {
+        // Prevent default behavior to validate first
+        event.preventDefault();
 
-            // Capture form data and submit it to Google Forms
-            const form = event.target;
-            const formData = new FormData(form);
-            fetch(form.action, {
+        // Check if any radio button is selected
+        const selectedOption = document.querySelector('input[name="entry.126804501"]:checked');
+
+        if (!selectedOption) {
+            // Show the error message if no option is selected
+            errorMessage.style.display = 'block';
+        } else {
+            // Hide the error message
+            errorMessage.style.display = 'none';
+
+            // Show success message
+            alert('Thank you for voting! Your opinion is valid! Click OK to see results...');
+
+            // Submit form data to Google Forms
+            const formData = new FormData(voteForm);
+            fetch(voteForm.action, {
                 method: 'POST',
                 body: formData,
-                mode: 'no-cors' // Bypass CORS restrictions with no-cors mode
-            }).then(() => {
-                // Redirect after a short delay to ensure the form is submitted
-                setTimeout(() => {
-                    window.location.href = "result.html"; // Replace with your redirect page
-                }, 100); // 1 second delay
-            }).catch(error => {
-                console.error("Form submission error:", error);
-                alert("There was an issue with the form submission.");
-            });
+                mode: 'no-cors',
+            })
+                .then(() => {
+                    // Delay before redirecting to allow the message to be seen
+                    setTimeout(() => {
+                        window.location.href = 'result.html';
+                    }, 100); // 1.5-second delay
+                })
+                .catch((error) => {
+                    console.error('Form submission error:', error);
+                    alert('There was an issue with the form submission.');
+                });
         }
-    </script>
+    });
+});
+
+</script>
+
 </head>
 
 <body class="template-color-1 spybody white-version" data-spy="scroll" data-target=".navbar-example2" data-offset="150">
@@ -202,7 +232,7 @@
                         </div>
                     </div>
                 </div>
-                <form 
+                <form id="voteForm"
                     action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSflWjP9VwCcCf953_e2XKYg729-jBHUt41_a1eN3GyhGR96-g/formResponse" 
                     method="post" 
                     onsubmit="redirectAfterSubmit(event)"
@@ -220,7 +250,7 @@
                                     </div>
                                     <div class="content text-center">
                                         <h4 class="title text-center"><a>Team Nurse</a> </h4>
-                                        <input type="radio" id="Nurse" name="entry.126804501" value="Nurse" required>
+                                        <input type="radio" id="Nurse" name="entry.126804501" value="Nurse">
                             <label class="radio-label" for="Nurse">&nbsp;</label><br/>
                                     </div>
                                 </div>
@@ -239,7 +269,7 @@
                                     </div>
                                     <div class="content text-center">
                                         <h4 class="title text-center"><a>Team Doctor</a></h4>
-                                        <input type="radio" id="Doctor" name="entry.126804501" value="Doctor" required>
+                                        <input type="radio" id="Doctor" name="entry.126804501" value="Doctor" >
                             <label class="radio-label" for="Doctor">&nbsp;</label><br/>
                                     </div>
                                 </div>
@@ -248,12 +278,21 @@
                         <!-- End Single Portfolio -->
 
                     </div>   
+                    <div class="error-message text-center" id="errorMessage">
+                        <br>
+                        Please choose any of the team above before submitting.
+                    </div>
                     <div class="col-lg-12">
-                        <br><br>
+                        <br>
                         <button name="submit" type="submit" id="submit" class="rn-btns">
                             <span>VOTE NOW</span>
                             <i data-feather="arrow-right"></i>
                         </button>
+                        <br>
+                        <div class="success-message text-center" id="successMessage" style="display: none; color: green; font-weight: bold;">
+                            Thank you for voting! Redirecting to results page...
+                        </div>
+                        
                     </div>  
                 </div>    
                 </form>
@@ -315,6 +354,5 @@
     <script src="js/jquery-one-page-nav.js"></script>
     <!-- main JS -->
     <script src="js/main.js"></script>
-
 
 </body></html>
